@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <meta name="theme-color" content="#003a8c">
+  <link rel="icon" type="image/png" href="/Garantia Brasil SEM FUNDO[1].png">
   <style>
     :root{
       --brand-blue: #003a8c;
@@ -25,16 +26,40 @@
     html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg-d1) 0%, var(--bg-d2) 60%);color:var(--brand-white);-webkit-font-smoothing:antialiased}
 
     .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}
-    .card{width:100%;max-width:980px;background:var(--card-bg);border-radius:14px;padding:16px;box-shadow:var(--shadow);display:flex;gap:18px;align-items:center;position:relative;overflow:visible;border:1px solid rgba(255,255,255,0.04)}
+    .card{width:100%;max-width:980px;background:var(--card-bg);border-radius:14px;padding:16px;box-shadow:var(--shadow);display:flex;gap:18px;align-items:center;position:relative;overflow:visible;border:1px solid rgba(255,255,255,0.04);flex-direction:column}
 
-    .brand-row{position:absolute;left:18px;top:18px;display:flex;align-items:center;gap:10px}
-    .brand-row img{height:44px;width:auto;border-radius:8px;box-shadow:0 8px 18px rgba(0,0,0,0.45);background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.02));padding:6px}
-
+    .logo-top {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 18px;
+      margin-top: 8px;
+    }
+    .logo-top img {
+      height: 92px;
+      width: auto;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+      background: linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.02));
+      padding: 10px;
+      max-width: 260px;
+    }
 
     .left{flex:1;display:flex;align-items:center;justify-content:center;padding:6px}
-    .wheel-outer{width:360px;height:360px;border-radius:50%;display:grid;place-items:center;position:relative;padding:12px;backdrop-filter: blur(6px) saturate(120%)}
+    .wheel-outer{width:320px;height:320px;border-radius:50%;display:grid;place-items:center;position:relative;padding:8px;backdrop-filter: blur(6px) saturate(120%)}
     canvas#wheel{width:100%;height:100%;border-radius:50%;display:block}
-    .pointer{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-bottom:30px solid var(--brand-yellow);z-index:30}
+    .pointer{
+      position:absolute;
+      top:-12px;
+      left:50%;
+      transform:translateX(-50%);
+      width:0;height:0;
+      border-left:16px solid transparent;
+      border-right:16px solid transparent;
+      border-top:30px solid var(--brand-yellow);
+      z-index:30;
+    }
     .center-badge{position:absolute;z-index:25;pointer-events:none;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--brand-white);color:var(--brand-blue);font-weight:800;font-size:14px;transform:translateY(6%);box-shadow:0 8px 20px rgba(0,0,0,0.45)}
 
     .right{width:320px;max-width:40%;display:flex;flex-direction:column;gap:12px;padding:6px}
@@ -63,19 +88,21 @@
 
     @media (max-width:880px){
       .card{flex-direction:column;padding:14px}
+      .logo-top img{height:64px;max-width:180px;}
       .brand-row{left:12px;top:12px}
       .left{order:1}
       .right{order:2;width:100%}
-      .wheel-outer{width:320px;height:320px}
-      .center-badge{width:72px;height:72px}
+      .wheel-outer{width:240px;height:240px}
+      .center-badge{width:60px;height:60px}
       .panel{right:12px;left:12px;top:64px;width:auto}
       .modal{flex-direction:column;padding:18px}
       .modal .left{width:100%}
     }
     @media (max-width:420px){
-      .wheel-outer{width:260px;height:260px}
-      .center-badge{width:64px;height:64px}
+      .wheel-outer{width:180px;height:180px}
+      .center-badge{width:44px;height:44px}
       .spin-btn{width:100%;font-size:15px;padding:12px}
+      .logo-top img{height:44px;max-width:120px;}
       .brand-row img{height:40px}
       .modal{padding:14px}
       .modal h2{font-size:18px}
@@ -87,11 +114,9 @@
 <body>
   <div class="wrap">
     <div class="card" role="application" aria-label="Roleta de Prêmios Garantia Brasil Auto">
-      
-      <div class="brand-row" aria-hidden="true">
+      <div class="logo-top">
         <img src="/Garantia Brasil SEM FUNDO[1].png" alt="Logomarca Garantia Brasil">
       </div>
-
       <div class="left">
         <div class="wheel-outer" aria-hidden="false">
           <div class="pointer" aria-hidden="true"></div>
@@ -99,7 +124,6 @@
           <div class="center-badge">GIRE<br/><span style="font-size:11px;opacity:.8;font-weight:700">AGORA</span></div>
         </div>
       </div>
-
       <div class="right">
         <div style="display:flex;gap:12px;align-items:center">
           <div style="flex:1">
@@ -107,19 +131,15 @@
             <div class="subtitle">Gire a roleta e ganhe prêmios na hora !</div>
           </div>
         </div>
-
         <button id="spinBtn" class="spin-btn" aria-live="polite">Girar a roleta</button>
       </div>
-
       <div class="tab" id="tabBtn" role="button" aria-expanded="false" aria-controls="panel"><small>Prêmios ▾</small></div>
       <div class="panel" id="panel" aria-hidden="true">
         <h4 style="margin-top:0">Opções da roleta</h4>
         <div id="prizeList"></div>
       </div>
-
     </div>
   </div>
-
   <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal" role="document">
       <div class="left">
@@ -133,14 +153,11 @@
         </div>
       </div>
       <div style="flex:1;display:flex;align-items:center;justify-content:center">
-  
         <canvas id="miniWheel" width="280" height="280" style="width:100%;max-width:280px;border-radius:12px;box-shadow:0 12px 40px rgba(2,6,23,0.25)"></canvas>
       </div>
     </div>
   </div>
-
   <script>
-
     const prizes = [
       'Higienização do Ar',
       'Verificação dos Itens de Segurança',
@@ -148,16 +165,13 @@
       'Cristalização do Parabrisa',
       'Rodízio de Pneus'
     ];
-
     const sectorColors = ['#004a9f','#ffffff','#ffd300','#e6f0ff','#ffd800'];
-
     const canvas = document.getElementById('wheel');
     const ctx = canvas.getContext('2d');
     const spinBtn = document.getElementById('spinBtn');
     const panel = document.getElementById('panel');
     const tabBtn = document.getElementById('tabBtn');
     const prizeList = document.getElementById('prizeList');
-
     const overlay = document.getElementById('overlay');
     const modalPrize = document.getElementById('modalPrize');
     const modalTitle = document.getElementById('modalTitle');
@@ -166,11 +180,9 @@
     const saveBtn = document.getElementById('saveBtn');
     const miniWheel = document.getElementById('miniWheel');
     const mctx = miniWheel.getContext('2d');
-
     let startAngle = 0;
     let isSpinning = false;
     const segments = prizes.length;
-
     function drawWheel(targetCtx = ctx, targetCanvas = canvas, angleOverride = null){
       const dpr = Math.max(1, window.devicePixelRatio || 1);
       const size = targetCanvas.clientWidth || targetCanvas.width;
@@ -178,11 +190,9 @@
       targetCanvas.height = size * dpr;
       targetCtx.setTransform(dpr,0,0,dpr,0,0);
       const cx = size/2, cy = size/2, radius = Math.min(size/2 - 6, size/2 - 6);
-
       targetCtx.clearRect(0,0,size,size);
       const anglePer = (2*Math.PI) / segments;
       const base = (angleOverride === null) ? (startAngle * Math.PI/180) : (angleOverride * Math.PI/180);
-
       targetCtx.lineWidth = 2;
       for(let i=0;i<segments;i++){
         const start = base + i*anglePer;
@@ -196,8 +206,6 @@
         targetCtx.fill();
         targetCtx.strokeStyle = 'rgba(0,0,0,0.12)';
         targetCtx.stroke();
-
-
         targetCtx.save();
         targetCtx.translate(cx,cy);
         targetCtx.rotate(start + anglePer/2);
@@ -208,11 +216,9 @@
         wrapText(targetCtx, text, radius - 14, -6);
         targetCtx.restore();
       }
-
       targetCtx.beginPath(); targetCtx.arc(cx,cy,radius * 0.72,0,Math.PI*2); targetCtx.strokeStyle='rgba(0,0,0,0.06)'; targetCtx.lineWidth=6; targetCtx.stroke();
       targetCtx.beginPath(); targetCtx.arc(cx,cy,14,0,Math.PI*2); targetCtx.fillStyle='rgba(0,0,0,0.08)'; targetCtx.fill();
     }
-
     function wrapText(context, text, radius, yOffset){
       const max = 18;
       const parts = text.split(' ');
@@ -228,7 +234,6 @@
         context.fillText(lines[i], radius, yOffset + (i - (lines.length-1)/2) * (fontSize + 2));
       }
     }
-
     function populatePanel(){
       prizeList.innerHTML = '';
       prizes.forEach((p,i)=>{
@@ -237,19 +242,17 @@
         prizeList.appendChild(it);
       });
     }
-
     function randChoice(){ return Math.floor(Math.random() * segments); }
-
     function spinTo(index){
       if(isSpinning) return;
       isSpinning = true;
       spinBtn.disabled = true;
-
       const anglePer = 360 / segments;
+      const pointerAngle = 270;
       const segmentCenter = index * anglePer + anglePer/2;
       const currentRotation = startAngle % 360;
       const fullTurns = 5 + Math.floor(Math.random()*3);
-      let target = fullTurns*360 + (360 - segmentCenter);
+      let target = fullTurns*360 + (pointerAngle - segmentCenter);
       const initial = startAngle;
       const delta = (target - currentRotation);
       const duration = 4200 + Math.floor(Math.random()*900);
@@ -269,50 +272,38 @@
       }
       requestAnimationFrame(frame);
     }
-
-
     function showResult(text, index){
       modalPrize.textContent = text;
       overlay.classList.add('open');
       overlay.setAttribute('aria-hidden','false');
       const anglePer = 360 / segments;
+      const pointerAngle = 270;
       const segmentCenter = index * anglePer + anglePer/2;
-      const finalAngle = 360 - segmentCenter; // top pointer
+      const finalAngle = pointerAngle - segmentCenter;
       drawWheel(mctx, miniWheel, finalAngle);
-
       document.querySelector('.modal').animate([
         { transform: 'translateY(12px) scale(.98)', opacity: 0 },
         { transform: 'translateY(0) scale(1)', opacity: 1 }
       ],{ duration: 360, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'both' });
-
       saveBtn.animate([{transform:'scale(1)'},{transform:'scale(1.03)'},{transform:'scale(1)'}],{duration:1200,iterations:1});
     }
-
     closeBtn.addEventListener('click', ()=>{ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); });
     overlay.addEventListener('click',(e)=>{ if(e.target===overlay) { overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); } });
-
     saveBtn.addEventListener('click', ()=>{
       const text = `Ganhou: ${modalPrize.textContent} - Garantia Brasil Auto`;
       if(navigator.clipboard){ navigator.clipboard.writeText(text).then(()=>{ saveBtn.textContent='Copiado'; setTimeout(()=> saveBtn.textContent='Salvar resultado',1200); }); }
       else { alert(text); }
     });
-
-
     tabBtn.addEventListener('click', ()=>{ const open = panel.classList.toggle('open'); panel.setAttribute('aria-hidden', (!open).toString()); tabBtn.setAttribute('aria-expanded', open.toString()); });
     spinBtn.addEventListener('click', ()=>{ if(isSpinning) return; const chosen = randChoice(); spinTo(chosen); });
-
     let holdTimer=null;
     spinBtn.addEventListener('pointerdown',(e)=>{ if(isSpinning) return; holdTimer = setTimeout(()=>{ const chosen = randChoice(); spinTo(chosen); },650); });
     ['pointerup','pointerleave','pointercancel'].forEach(ev=>{ spinBtn.addEventListener(ev,()=>{ if(holdTimer) clearTimeout(holdTimer); }); });
-
     let resizeTimer=null; function onResize(){ clearTimeout(resizeTimer); resizeTimer = setTimeout(()=>{ drawWheel(); },80); }
     window.addEventListener('resize',onResize);
-
     populatePanel();
     drawWheel();
-
     drawWheel(mctx, miniWheel, 0);
-
   </script>
 </body>
 </html>
