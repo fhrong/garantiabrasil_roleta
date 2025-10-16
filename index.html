@@ -24,22 +24,19 @@
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg-d1) 0%, var(--bg-d2) 60%);color:var(--brand-white);-webkit-font-smoothing:antialiased}
 
-    /* Layout */
     .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}
     .card{width:100%;max-width:980px;background:var(--card-bg);border-radius:14px;padding:16px;box-shadow:var(--shadow);display:flex;gap:18px;align-items:center;position:relative;overflow:visible;border:1px solid rgba(255,255,255,0.04)}
 
-    /* Logo small top-left */
     .brand-row{position:absolute;left:18px;top:18px;display:flex;align-items:center;gap:10px}
     .brand-row img{height:44px;width:auto;border-radius:8px;box-shadow:0 8px 18px rgba(0,0,0,0.45);background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.02));padding:6px}
 
-    /* Wheel area */
+
     .left{flex:1;display:flex;align-items:center;justify-content:center;padding:6px}
     .wheel-outer{width:360px;height:360px;border-radius:50%;display:grid;place-items:center;position:relative;padding:12px;backdrop-filter: blur(6px) saturate(120%)}
     canvas#wheel{width:100%;height:100%;border-radius:50%;display:block}
     .pointer{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-bottom:30px solid var(--brand-yellow);z-index:30}
     .center-badge{position:absolute;z-index:25;pointer-events:none;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--brand-white);color:var(--brand-blue);font-weight:800;font-size:14px;transform:translateY(6%);box-shadow:0 8px 20px rgba(0,0,0,0.45)}
 
-    /* Controls */
     .right{width:320px;max-width:40%;display:flex;flex-direction:column;gap:12px;padding:6px}
     .title{font-size:18px;font-weight:800}
     .subtitle{font-size:13px;opacity:.9}
@@ -48,13 +45,11 @@
 
     .info{background:var(--glass);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);font-size:13px}
 
-    /* panel */
     .tab{position:absolute;right:18px;top:18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;gap:8px;cursor:pointer;z-index:60}
     .panel{position:absolute;right:18px;top:64px;width:260px;background:linear-gradient(180deg,#07193a 0%, #031028 100%);border-radius:12px;padding:12px;box-shadow:0 12px 30px rgba(2,6,23,0.5);border:1px solid rgba(255,255,255,0.03);transform-origin:top right;transition:transform .28s ease,opacity .22s ease;opacity:0;transform:translateY(-8px) scale(.98);pointer-events:none}
     .panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
     .prize-item{display:flex;align-items:center;gap:10px;padding:8px;border-radius:9px;margin-bottom:8px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));font-size:13px}
 
-    /* Result modal (big, centered, mobile friendly) */
     .overlay{position:fixed;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.55), rgba(2,6,23,0.72));backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:18px;z-index:999}
     .overlay.open{display:flex}
     .modal{width:min(780px,96%);max-width:780px;border-radius:14px;background:linear-gradient(180deg,#ffffff 0%, #fbfbfb 100%);color:var(--brand-blue);padding:20px;display:flex;gap:18px;align-items:center;box-shadow:0 18px 60px rgba(2,6,23,0.6)}
@@ -66,7 +61,6 @@
     .btn-ghost{padding:10px 12px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:transparent;cursor:pointer}
     .btn-primary{padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--brand-yellow),#ffd76b);cursor:pointer;font-weight:800}
 
-    /* Responsive */
     @media (max-width:880px){
       .card{flex-direction:column;padding:14px}
       .brand-row{left:12px;top:12px}
@@ -87,15 +81,13 @@
       .modal h2{font-size:18px}
     }
 
-    /* small helpers */
     .muted{opacity:.8;font-size:13px}
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card" role="application" aria-label="Roleta de Prêmios Garantia Brasil Auto">
-
-      <!-- small logo placed top-left -->
+      
       <div class="brand-row" aria-hidden="true">
         <img src="/Garantia Brasil SEM FUNDO[1].png" alt="Logomarca Garantia Brasil">
       </div>
@@ -112,17 +104,11 @@
         <div style="display:flex;gap:12px;align-items:center">
           <div style="flex:1">
             <div class="title">Garantia Brasil Auto</div>
-            <div class="subtitle">Gire a roleta e ganhe prêmios na hora</div>
+            <div class="subtitle">Gire a roleta e ganhe prêmios na hora !</div>
           </div>
         </div>
 
         <button id="spinBtn" class="spin-btn" aria-live="polite">Girar a roleta</button>
-
-        <div class="info">
-          <div class="muted">Os prêmios estão disponíveis no menu <strong>Prêmios</strong> (canto superior direito).</div>
-        </div>
-
-        <div style="font-size:13px;opacity:.85">Dica: no celular, segure firme e toque no botão — a animação é sensível ao toque.</div>
       </div>
 
       <div class="tab" id="tabBtn" role="button" aria-expanded="false" aria-controls="panel"><small>Prêmios ▾</small></div>
@@ -134,7 +120,6 @@
     </div>
   </div>
 
-  <!-- BIG RESULT OVERLAY -->
   <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal" role="document">
       <div class="left">
@@ -148,14 +133,14 @@
         </div>
       </div>
       <div style="flex:1;display:flex;align-items:center;justify-content:center">
-        <!-- Decorative wheel snapshot -->
+  
         <canvas id="miniWheel" width="280" height="280" style="width:100%;max-width:280px;border-radius:12px;box-shadow:0 12px 40px rgba(2,6,23,0.25)"></canvas>
       </div>
     </div>
   </div>
 
   <script>
-    /* PRIZES */
+
     const prizes = [
       'Higienização do Ar',
       'Verificação dos Itens de Segurança',
@@ -212,7 +197,7 @@
         targetCtx.strokeStyle = 'rgba(0,0,0,0.12)';
         targetCtx.stroke();
 
-        // label
+
         targetCtx.save();
         targetCtx.translate(cx,cy);
         targetCtx.rotate(start + anglePer/2);
@@ -223,7 +208,7 @@
         wrapText(targetCtx, text, radius - 14, -6);
         targetCtx.restore();
       }
-      // rings
+
       targetCtx.beginPath(); targetCtx.arc(cx,cy,radius * 0.72,0,Math.PI*2); targetCtx.strokeStyle='rgba(0,0,0,0.06)'; targetCtx.lineWidth=6; targetCtx.stroke();
       targetCtx.beginPath(); targetCtx.arc(cx,cy,14,0,Math.PI*2); targetCtx.fillStyle='rgba(0,0,0,0.08)'; targetCtx.fill();
     }
@@ -285,24 +270,21 @@
       requestAnimationFrame(frame);
     }
 
-    /* Big overlay result */
+
     function showResult(text, index){
       modalPrize.textContent = text;
       overlay.classList.add('open');
       overlay.setAttribute('aria-hidden','false');
-      // render mini wheel with final angle so user sees which sector
       const anglePer = 360 / segments;
       const segmentCenter = index * anglePer + anglePer/2;
       const finalAngle = 360 - segmentCenter; // top pointer
       drawWheel(mctx, miniWheel, finalAngle);
 
-      // subtle entrance animation
       document.querySelector('.modal').animate([
         { transform: 'translateY(12px) scale(.98)', opacity: 0 },
         { transform: 'translateY(0) scale(1)', opacity: 1 }
       ],{ duration: 360, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'both' });
 
-      // optional gentle pulse on button
       saveBtn.animate([{transform:'scale(1)'},{transform:'scale(1.03)'},{transform:'scale(1)'}],{duration:1200,iterations:1});
     }
 
@@ -310,29 +292,25 @@
     overlay.addEventListener('click',(e)=>{ if(e.target===overlay) { overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); } });
 
     saveBtn.addEventListener('click', ()=>{
-      // copy to clipboard as a simple 'save' action - replaceable by backend call
       const text = `Ganhou: ${modalPrize.textContent} - Garantia Brasil Auto`;
       if(navigator.clipboard){ navigator.clipboard.writeText(text).then(()=>{ saveBtn.textContent='Copiado'; setTimeout(()=> saveBtn.textContent='Salvar resultado',1200); }); }
       else { alert(text); }
     });
 
-    /* UI wiring */
+
     tabBtn.addEventListener('click', ()=>{ const open = panel.classList.toggle('open'); panel.setAttribute('aria-hidden', (!open).toString()); tabBtn.setAttribute('aria-expanded', open.toString()); });
     spinBtn.addEventListener('click', ()=>{ if(isSpinning) return; const chosen = randChoice(); spinTo(chosen); });
 
-    // pointerdown long press alternate spin
     let holdTimer=null;
     spinBtn.addEventListener('pointerdown',(e)=>{ if(isSpinning) return; holdTimer = setTimeout(()=>{ const chosen = randChoice(); spinTo(chosen); },650); });
     ['pointerup','pointerleave','pointercancel'].forEach(ev=>{ spinBtn.addEventListener(ev,()=>{ if(holdTimer) clearTimeout(holdTimer); }); });
 
-    // resize handling
     let resizeTimer=null; function onResize(){ clearTimeout(resizeTimer); resizeTimer = setTimeout(()=>{ drawWheel(); },80); }
     window.addEventListener('resize',onResize);
 
-    // init
     populatePanel();
     drawWheel();
-    // mini wheel initial render
+
     drawWheel(mctx, miniWheel, 0);
 
   </script>
