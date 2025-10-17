@@ -12,68 +12,69 @@
   <style>
     :root{
       --brand-blue: #003a8c;
+      --brand-blue-2: #022c59;
       --brand-yellow: #ffd300;
+      --brand-yellow-2: #ffd76b;
       --brand-white: #ffffff;
-      --bg-d1: #071438;
-      --bg-d2: #07193a;
-      --glass: rgba(255,255,255,0.06);
-      --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+      --bg-d1: #03142a;
+      --bg-d2: #041a36;
+      --glass: rgba(255,255,255,0.04);
+      --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));
       --radius: 14px;
       --shadow: 0 12px 32px rgba(2,6,23,0.45);
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg-d1) 0%, var(--bg-d2) 60%);color:var(--brand-white);-webkit-font-smoothing:antialiased}
-
+    html,body{height:100%;margin:0;background:
+      linear-gradient(180deg,var(--bg-d1) 0%, var(--bg-d2) 60%);color:var(--brand-white);-webkit-font-smoothing:antialiased;}
     .wrap{
       min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:12px 8px;
+      padding:6px 10px;
     }
-
     .card{
       width:100%;
       max-width:980px;
-      height:auto;                     
-      max-height: calc(100vh - 20px);  
-      border: 2px solid rgba(0,58,140,0.18);
-      box-shadow: 0 2px 16px 0 rgba(0,58,140,0.10);
-      background: var(--card-bg);
-      border-radius:14px;
-      padding:12px 12px 16px;
+      max-height: calc(100vh - 12px);
+      height: auto;
+      border: 2px solid rgba(0,58,140,0.14);
+      box-shadow: var(--shadow);
+      background: linear-gradient(180deg, rgba(2,10,30,0.45), rgba(0,8,20,0.35)), rgba(255,255,255,0.02);
+      border-radius:var(--radius);
+      padding:12px;
       display:flex;
-      gap:12px;
+      gap:16px;
       align-items:center;
       position:relative;
       overflow:visible;
       flex-direction:column;
       justify-content:flex-start;
+      margin:0 auto;
     }
-
     .logo-top {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      margin-bottom: 10px;
-      margin-top: 6px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      width:100%;
+      margin-bottom:6px;
+      margin-top:6px;
     }
-    .logo-top img {
-      height: 90px;
-      width: auto;
-      border-radius: 10px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    .logo-top img{
+      height:84px;
+      width:auto;
+      border-radius:10px;
+      box-shadow:0 8px 26px rgba(0,0,0,0.45);
       background: linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.02));
-      padding: 8px;
-      max-width: 300px;
+      padding:8px;
+      max-width:320px;
     }
-
     .left{flex:0 0 auto;display:flex;align-items:center;justify-content:center;padding:6px}
     .wheel-outer{
       width:320px;
       height:320px;
+      max-width:78vw;
       border-radius:50%;
       display:grid;
       place-items:center;
@@ -82,11 +83,12 @@
       backdrop-filter: blur(6px) saturate(120%);
       margin:4px auto;
       flex-shrink:0;
+      transition:width .18s ease,height .18s ease;
     }
     canvas#wheel{width:100%;height:100%;border-radius:50%;display:block}
     .pointer{
       position:absolute;
-      top:-10px;
+      top:-8px;
       left:50%;
       transform:translateX(-50%);
       width:0;height:0;
@@ -94,6 +96,7 @@
       border-right:14px solid transparent;
       border-top:28px solid var(--brand-yellow);
       z-index:30;
+      filter: drop-shadow(0 6px 8px rgba(0,0,0,0.25));
     }
     .center-badge{
       position:absolute;
@@ -111,7 +114,6 @@
       transform:translateY(6%);
       box-shadow:0 8px 20px rgba(0,0,0,0.45)
     }
-
     .right{
       width:320px;
       max-width:40%;
@@ -120,19 +122,17 @@
       gap:10px;
       padding:6px;
     }
-    .title{font-size:18px;font-weight:800}
-    .subtitle{font-size:13px;opacity:.9}
+    .title{font-size:18px;font-weight:800;color:var(--brand-white)}
+    .subtitle{font-size:13px;opacity:.95;color:rgba(255,255,255,0.9)}
     .spin-btn{
-      padding:12px;border-radius:12px;border:0;background:linear-gradient(90deg,var(--brand-yellow),#ffdc5c);color:var(--brand-blue);font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 10px 26px rgba(255,211,0,0.12);transition:transform .12s ease,filter .12s ease
+      padding:12px;border-radius:12px;border:0;background: linear-gradient(90deg,var(--brand-yellow),var(--brand-yellow-2));color:var(--brand-blue);font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 10px 26px rgba(255,211,0,0.12);transition:transform .12s ease,filter .12s ease
     }
     .spin-btn:active{transform:translateY(2px)}
     .info{background:var(--glass);padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);font-size:13px}
-
     .tab{position:absolute;right:14px;top:14px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;gap:8px;cursor:pointer;z-index:60}
     .panel{position:absolute;right:14px;top:56px;width:260px;background:linear-gradient(180deg,#07193a 0%, #031028 100%);border-radius:12px;padding:10px;box-shadow:0 12px 30px rgba(2,6,23,0.5);border:1px solid rgba(255,255,255,0.03);transform-origin:top right;transition:transform .28s ease,opacity .22s ease;opacity:0;transform:translateY(-8px) scale(.98);pointer-events:none}
     .panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
     .prize-item{display:flex;align-items:center;gap:10px;padding:8px;border-radius:9px;margin-bottom:8px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));font-size:13px}
-
     .overlay{position:fixed;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.55), rgba(2,6,23,0.72));backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:12px;z-index:999}
     .overlay.open{display:flex}
     .modal{width:min(780px,96%);max-width:780px;border-radius:14px;background:linear-gradient(180deg,#ffffff 0%, #fbfbfb 100%);color:var(--brand-blue);padding:18px;display:flex;gap:12px;align-items:center;box-shadow:0 18px 60px rgba(2,6,23,0.6)}
@@ -142,34 +142,31 @@
     .modal .logo-sm{width:76px;height:76px;border-radius:10px;overflow:hidden;display:block}
     .modal .cta{display:flex;gap:10px;margin-top:12px}
     .btn-ghost{padding:10px 12px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:transparent;cursor:pointer}
-    .btn-primary{padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--brand-yellow),#ffd76b);cursor:pointer;font-weight:800}
-
+    .btn-primary{padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--brand-yellow),var(--brand-yellow-2));cursor:pointer;font-weight:800}
     .muted{opacity:.8;font-size:13px}
-
-    /* RESPONSIVE ADJUSTS */
     @media (max-width:980px){
       .card{max-width:720px;gap:10px;padding:10px}
       .logo-top img{height:76px}
-      .wheel-outer{width:280px;height:280px}
+      .wheel-outer{width:min(40vmin, 280px); height:min(40vmin, 280px)}
       .center-badge{width:68px;height:68px;font-size:13px}
       .right{width:260px;max-width:40%}
     }
-
     @media (max-width:880px){
       .card{
         flex-direction:column;
-        padding:8px 10px 10px;
+        padding:8px 8px 10px;
         width:100vw;
         max-width:100vw;
         border-radius:10px;
         gap:10px;
-        min-height: 380px; /* Garante espaço para a logo e conteúdo */
+        min-height: calc(100vh - 12px);
+        margin:6px 0;
       }
       .logo-top img{height:72px;max-width:220px;}
       .left{order:1}
       .right{order:2;width:100%;max-width:100%;padding:6px}
-      .wheel-outer{width:220px;height:220px}
-      .center-badge{width:56px;height:56px}
+      .wheel-outer{width:min(62vmin, 360px);height:min(62vmin,360px)}
+      .center-badge{width:64px;height:64px}
       .panel{right:12px;left:12px;top:64px;width:auto}
       .modal{flex-direction:column;padding:14px}
       .modal .left{width:100%}
@@ -177,12 +174,11 @@
       .subtitle{font-size:12px}
       .spin-btn{font-size:15px;padding:10px}
     }
-
     @media (max-width:420px){
-      .card{padding:6px 8px 10px;gap:8px; min-height: 320px;} /* Altura mínima para mobile */
+      .card{padding:6px 6px 10px;gap:8px; min-height: calc(100vh - 8px);}
       .logo-top img{height:56px;max-width:140px;}
-      .wheel-outer{width:160px;height:160px}
-      .center-badge{width:44px;height:44px;font-size:12px}
+      .wheel-outer{width:min(72vmin, 78vw);height:min(72vmin,78vw)}
+      .center-badge{width:52px;height:52px;font-size:12px}
       .spin-btn{width:100%;font-size:14px;padding:10px}
       .title{font-size:15px}
       .subtitle{font-size:12px}
@@ -190,7 +186,6 @@
       .modal h2{font-size:18px}
       .panel{top:60px;padding:8px}
     }
-
   </style>
 </head>
 <body>
@@ -203,14 +198,14 @@
         <div class="wheel-outer" aria-hidden="false">
           <div class="pointer" aria-hidden="true"></div>
           <canvas id="wheel" width="600" height="600" role="img" aria-label="Roleta de prêmios"></canvas>
-          <div class="center-badge">GIRE<br/><span style="font-size:11px;opacity:.8;font-weight:700">AGORA</span></div>
+          <div class="center-badge">GIRE<br/><span style="font-size:11px;opacity:.85;font-weight:700">AGORA</span></div>
         </div>
       </div>
       <div class="right">
         <div style="display:flex;gap:10px;align-items:center">
           <div style="flex:1">
             <div class="title">Garantia Brasil Auto</div>
-            <div class="subtitle">Gire a roleta e ganhe prêmios na hora !</div>
+            <div class="subtitle">Gire a roleta e ganhe prêmios na hora!</div>
           </div>
         </div>
         <button id="spinBtn" class="spin-btn" aria-live="polite">Girar a roleta</button>
@@ -222,15 +217,13 @@
       </div>
     </div>
   </div>
-
-  <!-- overlay e scripts inalterados (coloquei apenas para teste) -->
   <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal" role="document">
       <div class="left">
         <img class="logo-sm" src="/Garantia Brasil SEM FUNDO[1].png" alt="Logo Garantia Brasil">
         <h2 id="modalTitle">🎉 Parabéns!</h2>
         <p id="modalSubtitle">Você ganhou:</p>
-        <div id="modalPrize" style="margin-top:8px;font-size:20px;font-weight:800;color:#022c59"></div>
+        <div id="modalPrize" style="margin-top:8px;font-size:20px;font-weight:800;color:var(--brand-blue-2)"></div>
         <div class="cta">
           <button id="saveBtn" class="btn-primary">Salvar resultado</button>
           <button id="closeBtn" class="btn-ghost">Fechar</button>
@@ -241,7 +234,6 @@
       </div>
     </div>
   </div>
-
   <script>
     const prizes = [
       'Higienização do Ar',
@@ -250,7 +242,7 @@
       'Cristalização do Parabrisa',
       'Rodízio de Pneus'
     ];
-    const sectorColors = ['#004a9f','#ffffff','#ffd300','#e6f0ff','#ffd800'];
+    const sectorColors = ['#003a8c','#ffffff','#ffd300','#0056b3','#ffd76b'];
     const canvas = document.getElementById('wheel');
     const ctx = canvas.getContext('2d');
     const spinBtn = document.getElementById('spinBtn');
@@ -268,17 +260,44 @@
     let startAngle = 0;
     let isSpinning = false;
     const segments = prizes.length;
+    const css = getComputedStyle(document.documentElement);
+    const BRAND_BLUE = css.getPropertyValue('--brand-blue').trim() || '#003a8c';
+    const BRAND_WHITE = css.getPropertyValue('--brand-white').trim() || '#ffffff';
+    function hexToRgb(hex){
+      const h = hex.replace('#','').trim();
+      if(h.length === 3){
+        return {
+          r: parseInt(h[0]+h[0],16),
+          g: parseInt(h[1]+h[1],16),
+          b: parseInt(h[2]+h[2],16)
+        };
+      } else {
+        return {
+          r: parseInt(h.substring(0,2),16),
+          g: parseInt(h.substring(2,4),16),
+          b: parseInt(h.substring(4,6),16)
+        };
+      }
+    }
+    function isLight(hex){
+      try{
+        const {r,g,b} = hexToRgb(hex);
+        const lum = 0.2126*(r/255) + 0.7152*(g/255) + 0.0722*(b/255);
+        return lum > 0.7;
+      }catch(e){ return false; }
+    }
     function drawWheel(targetCtx = ctx, targetCanvas = canvas, angleOverride = null){
       const dpr = Math.max(1, window.devicePixelRatio || 1);
-      const size = targetCanvas.clientWidth || targetCanvas.width;
+      const rect = targetCanvas.getBoundingClientRect();
+      const size = Math.max(2, Math.round(rect.width));
       targetCanvas.width = size * dpr;
       targetCanvas.height = size * dpr;
       targetCtx.setTransform(dpr,0,0,dpr,0,0);
-      const cx = size/2, cy = size/2, radius = Math.min(size/2 - 6, size/2 - 6);
+      const cx = size/2, cy = size/2, radius = Math.min(size/2 - 8, size/2 - 8);
       targetCtx.clearRect(0,0,size,size);
       const anglePer = (2*Math.PI) / segments;
       const base = (angleOverride === null) ? (startAngle * Math.PI/180) : (angleOverride * Math.PI/180);
-      targetCtx.lineWidth = 2;
+      targetCtx.lineWidth = Math.max(1, size * 0.003);
       for(let i=0;i<segments;i++){
         const start = base + i*anglePer;
         const end = start + anglePer;
@@ -295,35 +314,37 @@
         targetCtx.translate(cx,cy);
         targetCtx.rotate(start + anglePer/2);
         targetCtx.textAlign = 'right';
-        targetCtx.fillStyle = '#00254d';
-        targetCtx.font = Math.max(10, Math.floor(size/24)) + 'px Inter, system-ui';
+        const txtColor = isLight(color) ? BRAND_BLUE : '#ffffff';
+        targetCtx.fillStyle = txtColor;
+        const fontSize = Math.max(10, Math.floor(size / 24));
+        targetCtx.font = fontSize + 'px Inter, system-ui';
         const text = prizes[i];
-        wrapText(targetCtx, text, radius - 14, -6);
+        wrapText(targetCtx, text, radius - 14, -6, fontSize);
         targetCtx.restore();
       }
-      targetCtx.beginPath(); targetCtx.arc(cx,cy,radius * 0.72,0,Math.PI*2); targetCtx.strokeStyle='rgba(0,0,0,0.06)'; targetCtx.lineWidth=6; targetCtx.stroke();
+      targetCtx.beginPath(); targetCtx.arc(cx,cy,radius * 0.72,0,Math.PI*2); targetCtx.strokeStyle='rgba(0,0,0,0.06)'; targetCtx.lineWidth=Math.max(4, size*0.02); targetCtx.stroke();
       targetCtx.beginPath(); targetCtx.arc(cx,cy,14,0,Math.PI*2); targetCtx.fillStyle='rgba(0,0,0,0.08)'; targetCtx.fill();
     }
-    function wrapText(context, text, radius, yOffset){
-      const max = 18;
+    function wrapText(context, text, radius, yOffset, fontSize){
+      const maxChars = Math.max(10, Math.floor((radius / fontSize) * 6));
       const parts = text.split(' ');
       const lines = [];
       let line = '';
       for(const w of parts){
-        if((line + ' ' + w).trim().length <= max) line = (line + ' ' + w).trim();
+        if((line + ' ' + w).trim().length <= maxChars) line = (line + ' ' + w).trim();
         else { lines.push(line); line = w; }
       }
       if(line) lines.push(line);
-      const fontSize = parseInt(context.font.match(/\d+/)[0],10);
+      const size = fontSize;
       for(let i=0;i<lines.length;i++){
-        context.fillText(lines[i], radius, yOffset + (i - (lines.length-1)/2) * (fontSize + 2));
+        context.fillText(lines[i], radius, yOffset + (i - (lines.length-1)/2) * (size + 2));
       }
     }
     function populatePanel(){
       prizeList.innerHTML = '';
       prizes.forEach((p,i)=>{
         const it = document.createElement('div'); it.className='prize-item';
-        it.innerHTML = `<div style='width:10px;height:10px;border-radius:50%;background:${sectorColors[i%sectorColors.length]};box-shadow:0 3px 8px rgba(0,0,0,0.25)'></div><div style='flex:1'>${i+1}. <strong>${p}</strong></div>`;
+        it.innerHTML = `<div style='width:12px;height:12px;border-radius:50%;background:${sectorColors[i%sectorColors.length]};box-shadow:0 3px 8px rgba(0,0,0,0.3)'></div><div style='flex:1'>${i+1}. <strong>${p}</strong></div>`;
         prizeList.appendChild(it);
       });
     }
@@ -384,11 +405,10 @@
     let holdTimer=null;
     spinBtn.addEventListener('pointerdown',(e)=>{ if(isSpinning) return; holdTimer = setTimeout(()=>{ const chosen = randChoice(); spinTo(chosen); },650); });
     ['pointerup','pointerleave','pointercancel'].forEach(ev=>{ spinBtn.addEventListener(ev,()=>{ if(holdTimer) clearTimeout(holdTimer); }); });
-    let resizeTimer=null; function onResize(){ clearTimeout(resizeTimer); resizeTimer = setTimeout(()=>{ drawWheel(); },80); }
+    let resizeTimer=null; function onResize(){ clearTimeout(resizeTimer); resizeTimer = setTimeout(()=>{ drawWheel(); drawWheel(mctx, miniWheel, 0); },80); }
     window.addEventListener('resize',onResize);
     populatePanel();
-    drawWheel();
-    drawWheel(mctx, miniWheel, 0);
+    window.requestAnimationFrame(()=>{ drawWheel(); drawWheel(mctx, miniWheel, 0); });
   </script>
 </body>
 </html>
